@@ -43,6 +43,10 @@ How many characters are from each planet?
 
 ```{r}
 
+starwars %>% 
+  group_by(homeworld) %>% 
+  summarise(n())
+
 
 
 
@@ -52,11 +56,21 @@ If you wanted to arrange this in descending order, what would you add to the pip
 
 ```{r}
 
+starwars %>% 
+  group_by(homeworld) %>% 
+  summarise(n()) %>% 
+  arrange(desc(homeworld))
 ```
 
 Find the average height for each eye color.
 
 ```{r}
+
+
+starwars %>% 
+  group_by(eye_color) %>% 
+  summarise(mean(height)) 
+  
 
 
 ```
@@ -65,12 +79,21 @@ What's with the NAs? Filter down to just brown eyes find out.
 
 
 ```{r}
+
+starwars %>% 
+  filter(eye_color == "brown") %>% 
+  group_by(height)
+
 ```
 
 Okay, so we have missing data here. Try summarising with `na.omit(height)` instead of just `height` or adding `na.rm = T` to the mean function inside summarize. 
 
 
 ```{r}
+starwars %>% 
+  group_by(eye_color) %>% 
+  summarise(mean(height)) %>% 
+  na.omit(height)
 
 
 ```
@@ -79,7 +102,16 @@ So, who is the tallest male? How many blue eyed women are there? How many gender
 
 
 ```{r}
+  
+starwars %>% 
+  filter(sex == "male") %>% 
+  group_by(height) %>% 
+  arrange(height, sex)
+
+starwars %>% 
+  group_by(gender) %>% 
+  tally()
+
+ 
 
 ```
-
-

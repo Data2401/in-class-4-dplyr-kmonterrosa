@@ -10,6 +10,8 @@ In the package `dplyr` there is a dataset called `starwars`.
 
 ```{r}
 glimpse(starwars)
+
+starwars <- starwars
 ```
 
 
@@ -29,6 +31,10 @@ Now, change this to see the same plot for the Droids.
 
 ```{r}
 
+droids <- starwars %>% filter(species == "Droid")
+plot(droids$height, droids$mass)
+
+starwars %>% filter(species == "Droid") %>% plot(mass ~ height, data = .)
 
 ```
 
@@ -36,6 +42,7 @@ Now, change this to see the same plot for the Droids.
 How many characters are from each planet?
 
 ```{r}
+
 
 
 
